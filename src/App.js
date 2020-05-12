@@ -1,52 +1,33 @@
 import React, { Component } from 'react';
 // Reactはjsxを使う時にトランスパイルするのに必要になる
 
+// 🌸propsとはコンポーネントの属性のこと ex)props.nameやprop.ageなどあるデータ(文字列、配列、オブジェクトなど)の属性を参照できるもの、{}で渡す。
+
 // クラスコンポーネント
 class App extends Component {
   render() {
-    const greeting = <span>Hi!!</span>
-    // {}でjsxの中に変数も使用できる
-    const dom = <h1 className='foo'>{greeting}</h1>
-
-    // return返すjsxは１つでないといけない＝意図しないdivタグが生じる
-    // return (
-    //   <div>
-    //     {dom}
-    //     <label htmlFor='bar'>bar</label>
-    //     <input type='text' onChange={() => {console.log('OK')}} />
-    //   </div>
-    // )
-    // 🌸React.Fragment(意図しないdivタグをつけない方法)🌸
+    const profiles = [
+      { name: '慎理', age: '25'},
+      { name: '美里', age: '24'},
+      { name: '名無し' }
+    ]
     return (
       <React.Fragment>
-        {dom}
-        <label htmlFor='bar'>bar</label>
-        <input type='text' onChange={() => {console.log('OK')}} />
+        {profiles.map((profile, index) => {
+          return <User key={index} name={profile.name} age={profile.age}/>
+        })}
       </React.Fragment>
     )
-    // 🌟<React.Fragment>で意図しないdivタグを消すことができる
   }
-  // jsxはbabelによって下にトランスパイルされる
-  // render(){
-  //   return React.createElement(
-  //     'div',
-  //     null,
-  //     "Hello World"
-  //   );
-  // }
 }
 
-// 🌸ファンクション(関数)コンポーネント🌸
-// const App =  () => {
-//   return (
-//     <div>
-//       <Cat />
-//     </div>
-//   )
-// }
+const User = (props) => {
+return <div>名前は{props.name}、年齢は{props.age}</div>
+}
 
-// const Cat = () => {
-//   return <div>Meow</div>
-// }
+// propsを受け取るコンポーネントに表示するデフォルトなどに使用できる
+User.defaultProps = {
+  age: 1
+}
 
 export default App;
