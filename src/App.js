@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 // Reactはjsxを使う時にトランスパイルするのに必要になる
 
-
+// クラスコンポーネント
 class App extends Component {
   render() {
     const greeting = <span>Hi!!</span>
-    const dom = <h1 className='foo'>{greeting}</h1>
     // {}でjsxの中に変数も使用できる
+    const dom = <h1 className='foo'>{greeting}</h1>
 
     // return返すjsxは１つでないといけない＝意図しないdivタグが生じる
     // return (
@@ -16,6 +16,7 @@ class App extends Component {
     //     <input type='text' onChange={() => {console.log('OK')}} />
     //   </div>
     // )
+    // 🌸React.Fragment(意図しないdivタグをつけない方法)🌸
     return (
       <React.Fragment>
         {dom}
@@ -25,7 +26,7 @@ class App extends Component {
     )
     // 🌟<React.Fragment>で意図しないdivタグを消すことができる
   }
-  // jsxは下にトランスパイルされる
+  // jsxはbabelによって下にトランスパイルされる
   // render(){
   //   return React.createElement(
   //     'div',
@@ -34,5 +35,18 @@ class App extends Component {
   //   );
   // }
 }
+
+// 🌸ファンクション(関数)コンポーネント🌸
+// const App =  () => {
+//   return (
+//     <div>
+//       <Cat />
+//     </div>
+//   )
+// }
+
+// const Cat = () => {
+//   return <div>Meow</div>
+// }
 
 export default App;
