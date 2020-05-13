@@ -1,36 +1,51 @@
 import React, { Component } from 'react';
 // Reactはjsxを使う時にトランスパイルするのに必要になる
-import PropTypes from 'prop-types';
 
-// 🌸propsとはコンポーネントの属性のこと ex)props.nameやprop.ageなどあるデータ(文字列、配列、オブジェクトなど)の属性を参照できるもの、{}で渡す。
 
-// クラスコンポーネント
-class App extends Component {
-  render() {
-    const profiles = [
-      { name: '慎理', age: 25},
-      { name: '美里', age: 24},
-      { name: '名無し', age: 100}
-    ]
-    return (
-      <React.Fragment>
-        {profiles.map((profile, index) => {
-          return <User key={index} name={profile.name} age={profile.age}/>
-        })}
-      </React.Fragment>
+// 🌸stateはクラスコンポーネントの内部でのみ状態を持つことができるもの(変更可能値)
+// 🌸propsは親コンポーネントから渡されるもの(変更不可能値)
+
+const App = () => (<Counter></Counter>)
+
+class Counter extends Component {
+
+  // 🌸コンポーネント初期化メソッド(カウンターコンポが呼ばれた時にはじめに実行)
+  constructor(props){
+    // 🌸親クラスのpropsを初期化
+    super(props)
+    // 🌸初期化後にオブジェクト生成(countをキーとして、0をバリューとする)
+    this.state = { count: 0 }
+  }
+
+
+  hundlePlusButton = () =>{
+    // 🌸ステートの更新メソッド
+    this.setState({
+      count: this.state.count + 1
+    })
+    // 🌸アンチパターン
+    // 🌸this.state = { count: this.state.count + 1 }
+    // 🌸DOMの変更がされないから
+  }
+
+  hundleMinusButton = () => {
+    this.setState({
+      count: this.state.count - 1
+    })
+  }
+
+  render(){
+    // 🌸setStateの度に呼ばれる＝その度に自動的にDOMの変更をしてくれるのがReactのいいところ
+    console.log('per setState')
+    return(
+    <React.Fragment>
+      <div>counter : { this.state.count }</div>
+      <button onClick={this.hundlePlusButton}>+1</button>
+      <button onClick={this.hundleMinusButton}>-1</button>
+    </React.Fragment>
     )
   }
 }
 
-const User = (props) => {
-return <div>名前は{props.name}、年齢は{props.age}</div>
-}
-
-// 🌸propsの型の定義・・・大規模なコンポーネントだと型がわかりにくくなるため🌸
-User.propTypes = {
-  name: PropTypes.string,
-  age: PropTypes.number.isRequired
-  // 🌸isRequired で 必須項目になる
-}
 
 export default App;
