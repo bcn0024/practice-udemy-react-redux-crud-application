@@ -41,6 +41,7 @@ class EventsIndex extends Component {
 // props.◯◯として使えるようにするための記述
 const mapStateToProps = state => ({ events: state.events })
   // props.eventsをした時に取れる値はstate.events(🍺eventレデューサーの第一引数の状態?🍺)ということ
+  // reducerの第一引数stateの中にeventsという{1:{id...},2:{id...}}というオブジェクトが渡されている
 const mapDispatchToProps = ({ readEvents })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventsIndex)
