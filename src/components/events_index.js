@@ -14,17 +14,15 @@ class EventsIndex extends Component {
     const props = this.props
     return(
     <React.Fragment>
-      <div>value : { props.value }</div>
-      <button onClick={ props.increment }>+1</button>
-      <button onClick={ props.decrement }>-1</button>
+      <div>{console.log(props.events)}</div>
     </React.Fragment>
     )
   }
 }
 
 // props.◯◯として使えるようにするための記述
-const mapStateToProps = state => ({})
-  // props.valueをした時に取れる値はstate.count.value(🌸storeの中のcountのレデューサーのvalue🌸)ということ
+const mapStateToProps = state => ({ events: state.events })
+  // props.eventsをした時に取れる値はstate.events(🌸レデューサーの第一引数の状態🌸)ということ
 const mapDispatchToProps = ({ readEvents })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventsIndex)
