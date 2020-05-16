@@ -1,5 +1,7 @@
 import { INCREMENT, DECREMENT } from '../actions'
 
+// レデューサーはアプリケーション内の状態の変更を担う
+
 const initialState = { value: 0 }
 
 export default (state = initialState, action) => {
