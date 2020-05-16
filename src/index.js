@@ -1,19 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+// applyMiddlewareはミドルウェアを使う時に必要
 import { Provider } from 'react-redux'
 // ストアと全コンポから直接ストアに接続できる(バケツリレーをしなくてよくなる)用のProviderをインポート
+import thunk from 'redux-thunk'
+// アクションクリエーターがアクションではなく関数を返すことができるようにする(ミドルウェア)
 import './index.css';
 import reducer from './reducers'
-import App from './components/App';
+import EventsIndex from './components/events_index';
 import * as serviceWorker from './serviceWorker';
 
-const store = createStore(reducer)
-
+const store = createStore(reducer, applyMiddleware(thunk))
+// 第二引数にミドルウェアを組み込む
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <EventsIndex />
   </Provider>,
   document.getElementById('root')
 );

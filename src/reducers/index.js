@@ -2,8 +2,8 @@
 
 import { combineReducers } from 'redux'
 // 結合する関数をインポート
-import count from './count'
+import events from './events'
 
-export default combineReducers ({ count })
+export default combineReducers ({ events })
 // export default combineReducers ({ foo, bar, baz })
 // 複数をcombineすることもできる
