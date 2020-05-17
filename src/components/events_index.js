@@ -41,7 +41,9 @@ class EventsIndex extends Component {
 // props.◯◯として使えるようにするための記述
 const mapStateToProps = state => ({ events: state.events })
   // props.eventsをした時に取れる値はstate.events(🍺eventレデューサーの第一引数の状態?🍺)ということ
-  // reducerの第一引数stateの中にeventsという{1:{id...},2:{id...}}というオブジェクトが渡されている
+  // 🔥reducerの第一引数(名は関係なし)stateの中にeventsレデューサから{1:{id...},2:{id...}}というオブジェクトが渡されている
+  // 🔥combineReducerの引数に使われたキーがそのままState分割にも流用される。
+  // 🔥combineReducersはレデューサーを整理して独自の状態のスライスを管理するのに役立ちます。 Reduxの場合、ストアは1つだけですが、combinReducersは、レデューサー間で論理的に同じ分割を維持するのに役立ちます。
 const mapDispatchToProps = ({ readEvents })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventsIndex)
